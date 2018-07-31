@@ -5,16 +5,16 @@ https://sdk.altvr.com/libs/altspace.js/2.9.0/altspace.min.js"></script></head>
 <body>
 <a-scene altspace="fullspace: true">
 <a-assets>
+<img id="carpet" src="textures\carpet.jpg">
 
 
 </a-assets>
 
-<a-entity position="-5.08 4.59 0" rotation="0 0 0" scale="1.0812 8.720851 10.5191" n-layout-browser='isEnclosure:false; url:;'></a-entity>
 
  
 
 <a-entity id="new-plane-entity " geometry="primitive: plane; width:10; height:-10;" position="0 0 0" rotation="-270 0 0" material="shader: 
-standard; transparent: false; color: #CA5757;  side: front; " shadow="receive: 
+standard; transparent: false; color: #CA5757; src: #carpet; repeat: 20 20; offset: 0 0;  side: front; " shadow="receive: 
 false; cast: false;" >
 </a-entity>
 
