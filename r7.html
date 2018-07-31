@@ -1,13 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
+<html><head><title>Space Redirect</title>
+<script src="https://cdn.jsdelivr.net/combine/npm/three@0.94.0/build/three.min.js,npm/altspace@2.9.0/dist/altspace.min.js,npm/altspacevr-behaviors@1.0.9/js/altspaceutil.min.js"></script>
+<script>
+	//altspace://account.altvr.com/api/events/999389007366325062
 
+	altspaceutil.getFullspaceApp().then(app => {
+		let nportal = new THREE.Object3D();
+		nportal.position.set(5, 0, 10);
+		app.scene.add(nportal);
+		nportal.addBehaviors(
+			new altspaceutil.behaviors.NativeComponent('n-portal', { targetEvent: '999389007366325062' }),
+			new class {
+				awake(o) {
+					this.object3d = o;
+					altspace.getThreeJSTrackingSkeleton().then(skeleton => {
+						this.skeleton = skeleton;
+						app.scene.add(skeleton);
+					});
+				}
 
-
-</head>
-<body>
-  <script>
-  document.body.appendChild(Object.assign(document.createElement('a'), { href: 'altspace://account.altvr.com/api/events/999389007366325062' })).click();
-</script>
-  </body>
-</html>
+				update() {
+					if(this.skeleton) this.object3d.position.copy(this.skeleton.getJoint('Spine').position);
+				}
+			}
+		);
+	});
+</script></head><body style="margin: 0px; overflow: hidden;"><canvas width="261" height="710" style="width: 261px; height: 710px;"></canvas></body></html>
